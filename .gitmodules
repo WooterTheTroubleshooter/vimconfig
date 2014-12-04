@@ -4,3 +4,12 @@
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
 	url = https://github.com/WooterTheTroubleshooter/vim-fugitive.git
+[submodule "bundle/phpcomplete.vim"]
+	path = bundle/phpcomplete.vim
+	url = git://github.com/shawncplus/phpcomplete.vim.git
+[submodule "bundle/vim-less"]
+	path = bundle/vim-less
+	url = https://github.com/groenewege/vim-less
+[submodule "bundle/javascript-libraries-syntax.vim"]
+	path = bundle/javascript-libraries-syntax.vim
+	url = https://github.com/othree/javascript-libraries-syntax.vim
