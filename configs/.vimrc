@@ -11,6 +11,7 @@ set history=50		    " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
 
 set cursorline          " higlight current line.
+set laststatus=2
 
 noremap <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
@@ -131,6 +132,8 @@ let g:syntastic_javascript_checkers = ['jsl']
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_python_pylint_args = '--rcfile=/home/wnm/.vim/configs/.pylintrc'
 
+let g:syntastic_perl_checkers = ['perl']
+let g:syntastic_enable_perl_checker = 1
 " Custom key mappings
 map <F3> <Esc>:EnableFastPHPFolds<Cr> 
 map <F4> <Esc>:foldclose<Cr>
