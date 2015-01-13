@@ -63,6 +63,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 filetype plugin on
+au BufNewFile,BufRead *.sah set filetype=js
 
 
 if &term=="xterm"
@@ -159,3 +160,8 @@ colorscheme wooter
 highlight Folded ctermfg=100
 highlight Folded ctermbg=0
 
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
