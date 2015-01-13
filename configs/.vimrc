@@ -63,7 +63,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 filetype plugin on
-au BufNewFile,BufRead *.sah set filetype=js
+au BufNewFile,BufRead *.sah set filetype=javascript
 
 
 if &term=="xterm"
