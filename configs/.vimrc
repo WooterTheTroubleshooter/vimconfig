@@ -109,7 +109,6 @@ set omnifunc=phpcomplete#CompletePHP
 set completeopt=menu
 
 
-
 function! InsertTabWrapper()
   if pumvisible()
     return "\<c-n>\<c-p>"
@@ -125,6 +124,10 @@ inoremap <expr><tab> InsertTabWrapper()
 inoremap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
 inoremap <C-X><C-O> <C-X><C-O><C-P> 
 
+" Persistent macros.
+let @u = "gUiw" " Convert word to uppercase.
+let @l = "guiw" " Convert word to lowercase.
+
 " Syntax checking
 let g:used_javascript_libs = 'jquery, angularjs'
 
@@ -135,6 +138,7 @@ let g:syntastic_python_pylint_args = '--rcfile=/home/wnm/.vim/configs/.pylintrc'
 
 let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_enable_perl_checker = 1
+
 " Custom key mappings
 map <F3> <Esc>:EnableFastPHPFolds<Cr> 
 map <F4> <Esc>:foldclose<Cr>

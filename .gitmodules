@@ -16,3 +16,6 @@
 [submodule "bundle/vim-easy-align"]
 	path = bundle/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "bundle/bundle/linediff"]
+	path = bundle/bundle/linediff
+	url = git://github.com/AndrewRadev/linediff.vim.git
