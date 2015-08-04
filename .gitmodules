@@ -22,3 +22,6 @@
 [submodule "bundle/phpfolding.vim"]
 	path = bundle/phpfolding.vim
 	url = https://github.com/rayburgemeestre/phpfolding.vim
+[submodule "bundle/vim-css3-syntax"]
+	path = bundle/vim-css3-syntax
+	url = https://github.com/hail2u/vim-css3-syntax.git
