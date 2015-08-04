@@ -94,8 +94,6 @@ set wildmode=longest,list
 set titlestring=%t
 set title
 
-source ~/.vim/phpfolding.vim
-
 "Remove trailing whitespaces
  fun! <SID>StripTrailingWhitespaces()
      let l = line(".")
