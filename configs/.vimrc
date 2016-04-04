@@ -83,6 +83,11 @@ if has("win32unix")
 	let &t_te.="\e[0 q"
 endif
 
+set mouse=a
+if has('mouse_sgr')
+	set ttymouse=sgr
+endif
+
 call pathogen#infect()
 
 " Customization
@@ -91,7 +96,7 @@ set tabstop=4
 set autoindent
 set scrolloff=12
 
-setlocal foldmethod=manual
+set foldmethod=manual
 
 set nowrap
 set sidescroll=1
@@ -101,6 +106,9 @@ set wildmode=longest,list
 
 set titlestring=%t
 set title
+
+" Make sure ctrlp uses case matching.
+set smartcase
 
 "Remove trailing whitespaces
  fun! <SID>StripTrailingWhitespaces()
@@ -115,20 +123,20 @@ set omnifunc=phpcomplete#CompletePHP
 set completeopt=menu
 
 
-function! InsertTabWrapper()
-  if pumvisible()
-    return "\<c-n>\<c-p>"
-  endif
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
-    return "\<tab>"
-  else
-    return "\<c-x>\<c-o>\<c-p>"
-  endif
-endfunction
-inoremap <expr><tab> InsertTabWrapper()
-inoremap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
-inoremap <C-X><C-O> <C-X><C-O><C-P> 
+" function! InsertTabWrapper()
+"   if pumvisible()
+"     return "\<c-n>\<c-p>"
+"   endif
+"   let col = col('.') - 1
+"   if !col || getline('.')[col - 1] !~ '\k'
+"     return "\<tab>"
+"   else
+"     return "\<c-x>\<c-o>\<c-p>"
+"   endif
+" endfunction
+" inoremap <expr><tab> InsertTabWrapper()
+" inoremap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
+" inoremap <C-X><C-O> <C-X><C-O><C-P> 
 
 " Persistent macros.
 let @u = "gUiw" " Convert word to uppercase.
