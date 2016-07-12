@@ -81,6 +81,9 @@ if has("win32unix")
 	let &t_SI.="\e[5 q"
 	let &t_EI.="\e[1 q"
 	let &t_te.="\e[0 q"
+
+" Cygwin specific settings
+
 endif
 
 call pathogen#infect()
@@ -147,7 +150,7 @@ let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_enable_perl_checker = 1
 
 let g:syntastic_java_javac_config_file_enabled=1
-let g:syntastic_java_javac_config_file = '~/.vim/configs/.syntastic_javac_config'
+" let g:syntastic_java_javac_config_file = '.syntastic_javac_config'
 
 " Custom key mappings
 map <F3> <Esc>:EnableFastPHPFolds<Cr>

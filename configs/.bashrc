@@ -12,6 +12,10 @@ if [ "$TERM" != "dumb" ]; then
 	alias vi="vim"
 fi
 
+if [ -d '/cygdrive' ]; then
+	export PATH=$PATH:"/cygdrive/C/Program Files/Java/jdk1.7.0_79/bin"
+fi
+
 # Git support?
 if [ ! -z "$__git_ps1" ]; then
 	# export ps1
