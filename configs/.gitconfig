@@ -7,6 +7,7 @@
 [alias]
 	d = difftool
 	ctags = !.git/hooks/ctags.sh
+	delete = git status | grep 'deleted:' | cut -d':' -f2 | xargs -t -I {} git add -u "{}"
 [push]
 	default = nothing
 [color]
@@ -25,3 +26,7 @@
   added = green
   changed = yellow
   untracked = cyan
+
+[merge "merge-po-files"]
+    name = merge po-files driver
+    driver = /etc/git-merge-po-files %O %A %B

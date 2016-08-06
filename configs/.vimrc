@@ -91,10 +91,13 @@ endif
 call pathogen#infect()
 
 " Customization
+set textwidth=0
 set shiftwidth=4
 set tabstop=4
 set autoindent
 set scrolloff=12
+set undofile
+set undodir=~/.vim/undo
 
 set foldmethod=manual
 
@@ -102,7 +105,12 @@ set nowrap
 set sidescroll=1
 set sidescrolloff=32
 
+" Tab completion for :
 set wildmode=longest,list
+
+" Code completion.
+set omnifunc=phpcomplete#CompletePHP
+set completeopt=menu,longest
 
 set titlestring=%t
 set title
@@ -118,25 +126,21 @@ set smartcase
     call cursor(l, c)
  endfun
 
-" Code completion.
-set omnifunc=phpcomplete#CompletePHP
-set completeopt=menu
 
 
-" function! InsertTabWrapper()
-"   if pumvisible()
-"     return "\<c-n>\<c-p>"
-"   endif
-"   let col = col('.') - 1
-"   if !col || getline('.')[col - 1] !~ '\k'
-"     return "\<tab>"
-"   else
-"     return "\<c-x>\<c-o>\<c-p>"
-"   endif
-" endfunction
-" inoremap <expr><tab> InsertTabWrapper()
-" inoremap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
-" inoremap <C-X><C-O> <C-X><C-O><C-P> 
+function! InsertTabWrapper()
+  if pumvisible()
+    return "\<c-n>"
+  endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\S'
+    return "\<tab>"
+  else
+    return "\<c-x>\<c-o>"
+  endif
+endfunction
+inoremap <expr><tab> InsertTabWrapper()
+inoremap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
 
 " Persistent macros.
 let @u = "gUiw" " Convert word to uppercase.
@@ -158,6 +162,11 @@ let g:syntastic_java_javac_config_file_enabled=1
 let g:syntastic_java_javac_config_file = '~/.vim/configs/.syntastic_javac_config'
 
 " Custom key mappings
+let mapleader = "\<Space>"
+
+map <leader>p <Esc>:FZF<Cr>
+map <leader>f <Esc>:FZF<Cr>
+
 map <F3> <Esc>:EnableFastPHPFolds<Cr>
 map <F4> <Esc>:foldclose<Cr>
 
