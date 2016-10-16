@@ -61,7 +61,6 @@ if &t_Co > 2 || has("gui_running")
 " " :Show trailing whitepace and spaces before a tab:
 	:autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
 endif
-
 filetype plugin on
 au BufNewFile,BufRead *.sah set filetype=javascript
 
@@ -86,7 +85,9 @@ if has("win32unix")
 
 endif
 
-set mouse=a
+if (has('mouse'))
+	set mouse=a
+endif
 if has('mouse_sgr')
 	set ttymouse=sgr
 endif
