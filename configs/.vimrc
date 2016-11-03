@@ -12,6 +12,7 @@ set ruler               " show the cursor position all the time
 
 set cursorline          " higlight current line.
 set laststatus=2
+set grepprg=~/.vim/grepnowhine.sh
 
 noremap <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
@@ -170,6 +171,7 @@ let mapleader = "\<Space>"
 
 map <leader>p <Esc>:FZF<Cr>
 map <leader>f <Esc>:FZF<Cr>
+map <leader>e <Esc>:cgete system('tail -n100 cache/error_log')\|cw<Cr>
 
 map <F3> <Esc>:EnableFastPHPFolds<Cr>
 map <F4> <Esc>:foldclose<Cr>
@@ -201,4 +203,8 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-set efm+=%.%#PHP\ %m\ in\ %f\ on\ line\ %l,%-G%.%#
+noremap Q <nop>
+
+set efm=%.%#PHP\ %m\ in\ %f\ on\ line\ %l,%.%#]\ %m\ %f\ @\ %l%.%#,%.%#]\ PHP\ %m\ %f:%l,%-G%.%#
+set switchbuf=usetab,vsplit
+
