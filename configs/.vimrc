@@ -171,7 +171,6 @@ let mapleader = "\<Space>"
 
 map <leader>p <Esc>:FZF<Cr>
 map <leader>f <Esc>:FZF<Cr>
-map <leader>e <Esc>:cgete system('tail -n100 cache/error_log')\|cw<Cr>
 
 map <F3> <Esc>:EnableFastPHPFolds<Cr>
 map <F4> <Esc>:foldclose<Cr>
@@ -205,6 +204,9 @@ nmap ga <Plug>(EasyAlign)
 
 noremap Q <nop>
 
-set efm=%.%#PHP\ %m\ in\ %f\ on\ line\ %l,%.%#]\ %m\ %f\ @\ %l%.%#,%.%#]\ PHP\ %m\ %f:%l,%-G%.%#
+" Error fixing shananigans.
+map <leader>e <Esc>:cgete system('tail -n100 cache/error_log')\|cw<Cr>
+map <leader>u <Esc>:cgete system('phpunit test')\|cw<Cr>
+set efm=%.%#PHP\ %m\ in\ %f\ on\ line\ %l,%.%#]\ %m\ %f\ @\ %l%.%#,%.%#]\ PHP\ %m\ %f:%l,%E%n)\ %m,%Z%f:%l,%C%m,%C,%-G%.%#
 set switchbuf=usetab,vsplit
 
