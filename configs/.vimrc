@@ -14,14 +14,13 @@ set cursorline          " higlight current line.
 set laststatus=2
 set grepprg=~/.vim/grepnowhine.sh
 
-noremap <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
   augroup redhat
   autocmd!
   " In text files, always limit the width of text to 78 characters
-  autocmd BufRead *.txt set tw=78
+"  autocmd BufRead *.txt set tw=78
   " When editing a file, always jump to the last cursor position
   autocmd BufReadPost *
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
@@ -32,6 +31,27 @@ if has("autocmd")
   " start with spec file template
   autocmd BufNewFile *.spec 0r /usr/share/vim/vimfiles/template.spec
   augroup END
+	" Switch syntax highlighting on, when the terminal has colors
+	" Also switch on highlighting the last used search pattern.
+	if &t_Co > 2 || has("gui_running")
+		syntax on
+		set hlsearch
+
+		colorscheme wooter
+		highlight Folded ctermfg=100
+		highlight Folded ctermbg=0
+
+
+		:highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+		:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+	" Show trailing whitespace and spaces before a tab:
+		:match ExtraWhitespace /\s\+$\| \+\ze\t/
+	" " :Show trailing whitepace and spaces before a tab:
+		:autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
+	endif
+
+	filetype plugin on
+	au BufNewFile,BufRead *.sah set filetype=javascript
 endif
 
 if has("cscope") && filereadable("/usr/bin/cscope")
@@ -49,21 +69,6 @@ if has("cscope") && filereadable("/usr/bin/cscope")
    set csverb
 endif
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-
-	:highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-	:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-" Show trailing whitespace and spaces before a tab:
-	:match ExtraWhitespace /\s\+$\| \+\ze\t/
-" " :Show trailing whitepace and spaces before a tab:
-	:autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
-endif
-filetype plugin on
-au BufNewFile,BufRead *.sah set filetype=javascript
 
 
 if &term=="xterm"
@@ -81,9 +86,6 @@ if has("win32unix")
 	let &t_SI.="\e[5 q"
 	let &t_EI.="\e[1 q"
 	let &t_te.="\e[0 q"
-
-" Cygwin specific settings
-
 endif
 
 if (has('mouse'))
@@ -192,9 +194,7 @@ map! <F10> <Esc>:w<Cr>SyntasticCheck<Cr>
 map <F11> <Esc>:EnablePHPFolds<Cr> 
 map <F12> <Esc>:DisablePHPFolds<Cr> 
 
-colorscheme wooter
-highlight Folded ctermfg=100
-highlight Folded ctermbg=0
+noremap <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -202,6 +202,7 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" Prevent starting ex mode in dvorak mode
 noremap Q <nop>
 
 " Error fixing shananigans.
