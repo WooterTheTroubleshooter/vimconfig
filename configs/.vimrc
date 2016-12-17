@@ -54,6 +54,7 @@ endif
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
+  set incsearch
 
 	:highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 	:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
