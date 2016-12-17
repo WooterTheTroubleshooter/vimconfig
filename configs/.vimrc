@@ -36,6 +36,7 @@ if has("autocmd")
 	if &t_Co > 2 || has("gui_running")
 		syntax on
 		set hlsearch
+		set incsearch
 
 		colorscheme wooter
 		highlight Folded ctermfg=100
@@ -68,8 +69,6 @@ if has("cscope") && filereadable("/usr/bin/cscope")
    endif
    set csverb
 endif
-
-
 
 if &term=="xterm"
      set t_Sb=[4%dm
