@@ -53,6 +53,8 @@ if has("autocmd")
 
 	filetype plugin on
 	au BufNewFile,BufRead *.sah set filetype=javascript
+
+	autocmd FileType qf wincmd J
 endif
 
 if has("cscope") && filereadable("/usr/bin/cscope")
@@ -164,6 +166,8 @@ let g:syntastic_python_pylint_args = '--rcfile=/home/wnm/.vim/configs/.pylintrc'
 let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_enable_perl_checker = 1
 
+let g:syntastic_rust_checkers = ['rustc']
+
 let g:syntastic_java_javac_config_file_enabled=1
 " let g:syntastic_java_javac_config_file = '.syntastic_javac_config'
 
@@ -176,22 +180,11 @@ map <leader>f <Esc>:FZF<Cr>
 map <F3> <Esc>:EnableFastPHPFolds<Cr>
 map <F4> <Esc>:foldclose<Cr>
 
-map <F5> <Esc><C-W>W
-map <F6> <Esc><C-W>w
-map! <F5> <Esc><C-W>W
-map! <F6> <Esc><C-W>w
-
-map <F7> <Esc>:tabp<Cr>
-map <F8> <Esc>:tabn<Cr>
-map! <F7> <Esc>:tabp<Cr>
-map! <F8> <Esc>:tabn<Cr>
-
-
 map <F10> <Esc>:w<Cr>:SyntasticCheck<Cr>
 map! <F10> <Esc>:w<Cr>SyntasticCheck<Cr>
 
-map <F11> <Esc>:EnablePHPFolds<Cr> 
-map <F12> <Esc>:DisablePHPFolds<Cr> 
+map <F11> <Esc>:EnablePHPFolds<Cr>
+map <F12> <Esc>:DisablePHPFolds<Cr>
 
 noremap <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
@@ -204,9 +197,26 @@ nmap ga <Plug>(EasyAlign)
 " Prevent starting ex mode in dvorak mode
 noremap Q <nop>
 
-" Error fixing shananigans.
-map <leader>e <Esc>:cgete system('tail -n100 cache/error_log')\|cw<Cr>
-map <leader>u <Esc>:cgete system('phpunit test')\|cw<Cr>
-set efm=%.%#PHP\ %m\ in\ %f\ on\ line\ %l,%.%#]\ %m\ %f\ @\ %l%.%#,%.%#]\ PHP\ %m\ %f:%l,%E%n)\ %m,%Z%f:%l,%C%m,%C,%-G%.%#
+
+map <leader>c <Esc>:SyntasticCheck<Cr>
 set switchbuf=usetab,vsplit
+au Filetype php call SetPhpOptions()
+function SetPhpOptions()
+	" Error fixing shananigans.
+	map <buffer> <leader>e <Esc>:cgete system('tail -n100 cache/error_log')\|cw<Cr>
+	map <buffer> <leader>u <Esc>:cgete system('phpunit test')\|cw<Cr>
+	map <buffer> <leader>i <Esc>:cgete system('php ' . expand('%'))\|cw<Cr>
+	map <buffer> <leader>d <Esc>:!php %<Cr>
+	set efm=%.%#PHP\ %m\ %f:%l,%.%#PHP\ %m\ in\ %f\ on\ line\ %l,%.%#]\ %m\ %f\ @\ %l%.%#,%.%#]\ PHP\ %m\ %f:%l,%E%n)\ %m,%Z%f:%l,%C%m,%C,%-G%.%#
+endfunction
+
+au FileType rust call SetRustOptions()
+function SetRustOptions()
+	compiler cargo
+	map <buffer> <leader>e <Esc>:make build\|cw<Cr>
+	map <buffer> <leader>u <Esc>:make test\|cw<Cr>
+	map <buffer> <leader>i <Esc>:!cargo build<Cr>
+	map <buffer> <leader>d <Esc>:!cargo run<Cr>
+	ConqueGdbExe rust-gdb
+endfunction
 
