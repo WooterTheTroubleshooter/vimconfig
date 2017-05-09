@@ -52,3 +52,9 @@
 [submodule "bundle/Conque-GDB"]
 	path = bundle/Conque-GDB
 	url = https://github.com/vim-scripts/Conque-GDB
+[submodule "bundle/wmgraphviz.vim"]
+	path = bundle/wmgraphviz.vim
+	url = https://github.com/wannesm/wmgraphviz.vim.git
+[submodule "bundle/vim-go"]
+	path = bundle/vim-go
+	url = https://github.com/fatih/vim-go.git
