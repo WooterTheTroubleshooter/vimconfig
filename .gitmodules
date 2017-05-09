@@ -52,3 +52,9 @@
 [submodule "bundle/Conque-GDB"]
 	path = bundle/Conque-GDB
 	url = https://github.com/vim-scripts/Conque-GDB
+[submodule "bundle/ale"]
+	path = bundle/ale
+	url = https://github.com/w0rp/ale.git
+[submodule "vim-repeat"]
+	path = vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
