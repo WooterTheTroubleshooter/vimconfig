@@ -61,6 +61,6 @@
 [submodule "bundle/ale"]
 	path = bundle/ale
 	url = https://github.com/w0rp/ale.git
-[submodule "vim-repeat"]
-	path = vim-repeat
-	url = https://github.com/tpope/vim-repeat.git
+[submodule "bundle/vim-repeat"]
+	path = bundle/vim-repeat
+	url = https://github.com/tpope/vim-repeat/
