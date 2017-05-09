@@ -14,6 +14,8 @@ set cursorline          " higlight current line.
 set laststatus=2
 set grepprg=~/.vim/grepnowhine.sh
 
+set listchars=eol:↲,space:·,tab:»\ 
+set list
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
@@ -40,8 +42,13 @@ if has("autocmd")
 
 		colorscheme wooter
 		highlight Folded ctermfg=100
-		highlight Folded ctermbg=0
+		highlight Folded ctermbg=233
+		set colorcolumn=80
+		highlight ColorColumn ctermbg=233
+		highlight CursorLine ctermbg=234
 
+		highlight SpecialKey ctermfg=235
+		highlight NonText ctermfg=235
 
 		:highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 		:autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
@@ -111,7 +118,7 @@ set foldmethod=manual
 
 set nowrap
 set sidescroll=1
-set sidescrolloff=32
+set sidescrolloff=16
 
 " Tab completion for :
 set wildmode=longest,list
@@ -153,8 +160,15 @@ inoremap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
 " Persistent macros.
 let @u = "gUiw" " Convert word to uppercase.
 let @l = "guiw" " Convert word to lowercase.
-
+" let @e = "oIerror_log(__METHOD__ . ' 1: ');^"
+let @e = "oIerror_log(__METHOD__ . \" =line('i�kb.'): \");^"
 " Syntax checking
+" au! bufwritepost * Neomake
+" let g:neomake_php_enabled_makers = ['php', 'phpmd']
+
+" Syntastic
+let g:syntastic_mode_map = { "mode" : "passive" }
+
 let g:used_javascript_libs = 'jquery, angularjs'
 let g:syntastic_javascript_checkers = ['jsl']
 
@@ -171,6 +185,7 @@ let g:syntastic_rust_checkers = ['rustc']
 let g:syntastic_java_javac_config_file_enabled=1
 " let g:syntastic_java_javac_config_file = '.syntastic_javac_config'
 
+
 " Custom key mappings
 let mapleader = "\<Space>"
 
@@ -180,13 +195,12 @@ map <leader>f <Esc>:FZF<Cr>
 map <F3> <Esc>:EnableFastPHPFolds<Cr>
 map <F4> <Esc>:foldclose<Cr>
 
-map <F10> <Esc>:w<Cr>:SyntasticCheck<Cr>
-map! <F10> <Esc>:w<Cr>SyntasticCheck<Cr>
-
 map <F11> <Esc>:EnablePHPFolds<Cr>
 map <F12> <Esc>:DisablePHPFolds<Cr>
 
 noremap <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+map <C-l> :<C-u>nohlsearch<Cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -200,8 +214,8 @@ noremap Q <nop>
 
 map <leader>c <Esc>:SyntasticCheck<Cr>
 set switchbuf=usetab,vsplit
-au Filetype php call SetPhpOptions()
-function SetPhpOptions()
+au! Filetype php call SetPhpOptions()
+function! SetPhpOptions()
 	" Error fixing shananigans.
 	map <buffer> <leader>e <Esc>:cgete system('tail -n100 cache/error_log')\|cw<Cr>
 	map <buffer> <leader>u <Esc>:cgete system('phpunit test')\|cw<Cr>
@@ -210,8 +224,8 @@ function SetPhpOptions()
 	set efm=%.%#PHP\ %m\ %f:%l,%.%#PHP\ %m\ in\ %f\ on\ line\ %l,%.%#]\ %m\ %f\ @\ %l%.%#,%.%#]\ PHP\ %m\ %f:%l,%E%n)\ %m,%Z%f:%l,%C%m,%C,%-G%.%#
 endfunction
 
-au FileType rust call SetRustOptions()
-function SetRustOptions()
+au! FileType rust call SetRustOptions()
+function! SetRustOptions()
 	compiler cargo
 	map <buffer> <leader>e <Esc>:make build\|cw<Cr>
 	map <buffer> <leader>u <Esc>:make test\|cw<Cr>
@@ -219,4 +233,19 @@ function SetRustOptions()
 	map <buffer> <leader>d <Esc>:!cargo run<Cr>
 	ConqueGdbExe rust-gdb
 endfunction
+
+
+let g:ale_lint_on_text_changed = 0
+augroup ALERunOnInsertLeaveGroup
+	autocmd!
+	autocmd InsertLeave * call ale#Queue(0)
+augroup END
+
+augroup ALERunOnTextChangedNormalGroup
+	autocmd!
+	autocmd TextChanged * call ale#Queue(g:ale_lint_delay)
+augroup END
+
+" vnoremap <cr> "vy:let @/=@"<cr>
+" vnoremap <cr> y:let @/=@"<cr>
 
