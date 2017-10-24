@@ -4,6 +4,9 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
+[merge]
+	tool = vimdiff
+
 [alias]
 	d = difftool
 	ctags = !.git/hooks/ctags.sh
@@ -30,3 +33,4 @@
 [merge "merge-po-files"]
     name = merge po-files driver
     driver = /etc/git-merge-po-files %O %A %B
+
