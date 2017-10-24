@@ -17,6 +17,37 @@ set grepprg=~/.vim/grepnowhine.sh
 set listchars=eol:↲,space:·,tab:»\ 
 set list
 
+set textwidth=0
+set shiftwidth=4
+set tabstop=4
+set autoindent
+set scrolloff=12
+set undofile
+set undodir=~/.vim/undo
+
+set foldmethod=manual
+
+set nowrap
+set sidescroll=1
+set sidescrolloff=16
+
+" Tab completion for :
+set wildmode=longest,list
+
+" Code completion.
+set omnifunc=phpcomplete#CompletePHP
+set completeopt=menu,longest
+
+set titlestring=%t
+set title
+
+" Make sure ctrlp uses case matching.
+set smartcase
+set noshowmatch
+
+let g:loaded_matchparen=1
+
+
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
   augroup redhat
@@ -105,33 +136,6 @@ endif
 
 call pathogen#infect()
 
-" Customization
-set textwidth=0
-set shiftwidth=4
-set tabstop=4
-set autoindent
-set scrolloff=12
-set undofile
-set undodir=~/.vim/undo
-
-set foldmethod=manual
-
-set nowrap
-set sidescroll=1
-set sidescrolloff=16
-
-" Tab completion for :
-set wildmode=longest,list
-
-" Code completion.
-set omnifunc=phpcomplete#CompletePHP
-set completeopt=menu,longest
-
-set titlestring=%t
-set title
-
-" Make sure ctrlp uses case matching.
-set smartcase
 
 "Remove trailing whitespaces
  fun! <SID>StripTrailingWhitespaces()
@@ -162,9 +166,6 @@ let @u = "gUiw" " Convert word to uppercase.
 let @l = "guiw" " Convert word to lowercase.
 " let @e = "oIerror_log(__METHOD__ . ' 1: ');^"
 let @e = "oIerror_log(__METHOD__ . \" =line('i�kb.'): \");^"
-" Syntax checking
-" au! bufwritepost * Neomake
-" let g:neomake_php_enabled_makers = ['php', 'phpmd']
 
 " Syntastic
 let g:syntastic_mode_map = { "mode" : "passive" }
@@ -200,7 +201,7 @@ map <F12> <Esc>:DisablePHPFolds<Cr>
 
 noremap <C-\> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
-map <C-l> :<C-u>nohlsearch<Cr>
+map <C-/> :<C-u>nohlsearch<Cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
