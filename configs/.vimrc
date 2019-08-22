@@ -1,6 +1,6 @@
-if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
-   set fileencodings=ucs-bom,utf-8,latin1
-endif
+"if v:lang =~ "utf8$" || v:lang =~ "UTF-8$" set
+"fileencodings=ucs-bom,utf-8,latin1
+"endif
 
 set nocompatible        " Use Vim defaults (much better!)
 set bs=indent,eol,start " allow backspacing over everything in insert mode
@@ -35,8 +35,7 @@ set sidescrolloff=16
 set wildmode=longest,list
 
 " Code completion.
-set omnifunc=phpcomplete#CompletePHP
-set completeopt=menu,longest
+set completeopt=menu,longest,preview
 
 set titlestring=%t
 set title
@@ -46,7 +45,6 @@ set smartcase
 set noshowmatch
 
 let g:loaded_matchparen=1
-
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
@@ -161,37 +159,13 @@ endfunction
 inoremap <expr><tab> InsertTabWrapper()
 inoremap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
 
-" Persistent macros.
-let @u = "gUiw" " Convert word to uppercase.
-let @l = "guiw" " Convert word to lowercase.
-" let @e = "oIerror_log(__METHOD__ . ' 1: ');^"
-let @e = "oIerror_log(__METHOD__ . \" =line('i€kb.'): \");^"
 
-" Syntastic
-let g:syntastic_mode_map = { "mode" : "passive" }
-
-let g:used_javascript_libs = 'jquery, angularjs'
-let g:syntastic_javascript_checkers = ['jsl']
-
-let g:syntastic_php_checkers = ['php', 'phpmd']
-
-let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_python_pylint_args = '--rcfile=/home/wnm/.vim/configs/.pylintrc'
-
-let g:syntastic_perl_checkers = ['perl']
-let g:syntastic_enable_perl_checker = 1
-
-let g:syntastic_rust_checkers = ['rustc']
-
-let g:syntastic_java_javac_config_file_enabled=1
-" let g:syntastic_java_javac_config_file = '.syntastic_javac_config'
 
 
 " Custom key mappings
 let mapleader = "\<Space>"
 
-map <leader>p <Esc>:FZF<Cr>
-map <leader>f <Esc>:FZF<Cr>
+noremap <leader>p <Esc>:FZF<Cr>
 
 map <F3> <Esc>:EnableFastPHPFolds<Cr>
 map <F4> <Esc>:foldclose<Cr>
@@ -212,27 +186,43 @@ nmap ga <Plug>(EasyAlign)
 " Prevent starting ex mode in dvorak mode
 noremap Q <nop>
 
-
-map <leader>c <Esc>:SyntasticCheck<Cr>
-set switchbuf=usetab,vsplit
+set switchbuf=useopen,usetab,vsplit
 au! Filetype php call SetPhpOptions()
 function! SetPhpOptions()
+	set omnifunc=phpcomplete#CompletePHP
+
 	" Error fixing shananigans.
 	map <buffer> <leader>e <Esc>:cgete system('tail -n100 cache/error_log')\|cw<Cr>
 	map <buffer> <leader>u <Esc>:cgete system('phpunit test')\|cw<Cr>
 	map <buffer> <leader>i <Esc>:cgete system('php ' . expand('%'))\|cw<Cr>
 	map <buffer> <leader>d <Esc>:!php %<Cr>
 	set efm=%.%#PHP\ %m\ %f:%l,%.%#PHP\ %m\ in\ %f\ on\ line\ %l,%.%#]\ %m\ %f\ @\ %l%.%#,%.%#]\ PHP\ %m\ %f:%l,%E%n)\ %m,%Z%f:%l,%C%m,%C,%-G%.%#
+
+	let @e = "oIerror_log(__METHOD__ . \" =line('i€kb.'): \");^"
 endfunction
 
 au! FileType rust call SetRustOptions()
 function! SetRustOptions()
+set omnifunc=ale#completion#OmniFunc
+	let g:ale_linters = {'rust': ['rls','cargo','rustc']}
+	let g:ale_fixers = {'rust': ['rustfmt']}
+	let g:ale_completion_enabled = 1
+	let g:ale_rust_rls_toolchain = 'nightly'
+
 	compiler cargo
-	map <buffer> <leader>e <Esc>:make build\|cw<Cr>
-	map <buffer> <leader>u <Esc>:make test\|cw<Cr>
-	map <buffer> <leader>i <Esc>:!cargo build<Cr>
-	map <buffer> <leader>d <Esc>:!cargo run<Cr>
+"	map <buffer> <leader>e <Esc>:make build\|cw<Cr>
+"	map <buffer> <leader>u <Esc>:make test\|cw<Cr>
+	map <buffer> <leader>b <Esc>:!cargo build<Cr>
+	map <buffer> <leader>r <Esc>:!cargo run<Cr>
 	ConqueGdbExe rust-gdb
+
+" Ale
+	nmap <leader>gt :ALEGoToTypeDefinitionInVSplit<cr>
+	nmap <leader>gd :ALEGoToDefinitionInVSplit<cr>
+	nmap <leader>cd :lcd %:p:h<cr>:ALELint<cr>
+	nmap <leader>f :ALEFindReferences<cr>
+	nmap <leader>h :ALEHover<cr>
+	nmap <leader>d :ALEDetail<cr>
 endfunction
 
 
