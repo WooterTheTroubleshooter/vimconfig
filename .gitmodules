@@ -3,7 +3,7 @@
 	url = https://github.com/scrooloose/syntastic.git
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
-	url = https://github.com/WooterTheTroubleshooter/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive/
 [submodule "bundle/phpcomplete.vim"]
 	path = bundle/phpcomplete.vim
 	url = git://github.com/shawncplus/phpcomplete.vim.git
