@@ -1,72 +1,72 @@
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
+	url = git://github.com/scrooloose/syntastic.git
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
+	url = git://github.com/tpope/vim-fugitive.git
 [submodule "bundle/phpcomplete.vim"]
 	path = bundle/phpcomplete.vim
 	url = git://github.com/shawncplus/phpcomplete.vim.git
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
-	url = https://github.com/groenewege/vim-less
+	url = git://github.com/groenewege/vim-less
 [submodule "bundle/javascript-libraries-syntax.vim"]
 	path = bundle/javascript-libraries-syntax.vim
-	url = https://github.com/othree/javascript-libraries-syntax.vim
+	url = git://github.com/othree/javascript-libraries-syntax.vim
 [submodule "bundle/vim-easy-align"]
 	path = bundle/vim-easy-align
-	url = https://github.com/junegunn/vim-easy-align.git
+	url = git://github.com/junegunn/vim-easy-align.git
 [submodule "bundle/linediff"]
 	path = bundle/linediff
 	url = git://github.com/AndrewRadev/linediff.vim.git
 [submodule "bundle/phpfolding.vim"]
 	path = bundle/phpfolding.vim
-	url = https://github.com/rayburgemeestre/phpfolding.vim
+	url = git://github.com/rayburgemeestre/phpfolding.vim
 [submodule "bundle/vim-css3-syntax"]
 	path = bundle/vim-css3-syntax
-	url = https://github.com/hail2u/vim-css3-syntax.git
+	url = git://github.com/hail2u/vim-css3-syntax.git
 [submodule "bundle/vim-easymotion"]
 	path = bundle/vim-easymotion
-	url = https://github.com/easymotion/vim-easymotion
+	url = git://github.com/easymotion/vim-easymotion
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
-	url = https://github.com/tpope/vim-surround
+	url = git://github.com/tpope/vim-surround
 [submodule "bundle/fzf"]
 	path = bundle/fzf
-	url = https://github.com/junegunn/fzf.git
+	url = git://github.com/junegunn/fzf.git
 [submodule "bundle/rust.vim"]
 	path = bundle/rust.vim
-	url = https://github.com/rust-lang/rust.vim.git
+	url = git://github.com/rust-lang/rust.vim.git
 [submodule "bundle/vim-php-manual"]
 	path = bundle/vim-php-manual
-	url = https://github.com/alvan/vim-php-manual
+	url = git://github.com/alvan/vim-php-manual
 [submodule "bundle/SQLUtilities"]
 	path = bundle/SQLUtilities
-	url = https://github.com/vim-scripts/SQLUtilities.git
+	url = git://github.com/vim-scripts/SQLUtilities.git
 [submodule "bundle/Align"]
 	path = bundle/Align
-	url = https://github.com/vim-scripts/Align.git
+	url = git://github.com/vim-scripts/Align.git
 [submodule "bundle/vdebug"]
 	path = bundle/vdebug
-	url = https://github.com/joonty/vdebug.git
+	url = git://github.com/joonty/vdebug.git
 [submodule "bundle/Conque-GDB"]
 	path = bundle/Conque-GDB
-	url = https://github.com/vim-scripts/Conque-GDB
+	url = git://github.com/vim-scripts/Conque-GDB
 [submodule "bundle/wmgraphviz.vim"]
 	path = bundle/wmgraphviz.vim
-	url = https://github.com/wannesm/wmgraphviz.vim.git
+	url = git://github.com/wannesm/wmgraphviz.vim.git
 [submodule "bundle/vim-go"]
 	path = bundle/vim-go
-	url = https://github.com/fatih/vim-go.git
+	url = git://github.com/fatih/vim-go.git
 [submodule "bundle/ale"]
 	path = bundle/ale
-	url = https://github.com/w0rp/ale.git
+	url = git://github.com/w0rp/ale.git
 [submodule "bundle/vim-repeat"]
 	path = bundle/vim-repeat
-	url = https://github.com/tpope/vim-repeat/
+	url = git://github.com/tpope/vim-repeat/
 [submodule "bundle/vim-unimpaired"]
 	path = bundle/vim-unimpaired
-	url = https://github.com/tpope/vim-unimpaired
+	url = git://github.com/tpope/vim-unimpaired
 [submodule "bundle/vim-racer"]
 	path = bundle/vim-racer
 	url = https://github.com/racer-rust/vim-racer.git
